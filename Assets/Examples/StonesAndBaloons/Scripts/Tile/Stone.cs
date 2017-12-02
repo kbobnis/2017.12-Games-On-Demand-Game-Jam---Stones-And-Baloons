@@ -15,9 +15,12 @@ namespace StonesAndBaloons {
 				this.health -= deltaTime;
 				if (health <= 0) {
 					health = 0;
+					Destroy(gameObject);
 				}
-				float f = this.health / startingHealth;
-				this.transform.localScale = new Vector3(f, f, f);
+				else {
+					float f = this.health / startingHealth;
+					this.transform.localScale = new Vector3(f, f, f);
+				}
 			}
 		}
 	}

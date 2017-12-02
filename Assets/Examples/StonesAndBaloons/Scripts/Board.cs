@@ -6,8 +6,11 @@ namespace StonesAndBaloons {
 
 		[SerializeField] private GameObject stonesGO;
 		[SerializeField] private GameObject tilePrefab;
+		[SerializeField] private GameObject baloonSpawnPoint;
+		[SerializeField] private Baloon baloonPrefab;
 
 		private List<List<Tile>> tiles = new List<List<Tile>>();
+		private List<Baloon> baloons = new List<Baloon>(); 
 		
 		public void CreateStones(int w, int h) {
 			for (int x = 0; x < w; x++) {
@@ -25,6 +28,13 @@ namespace StonesAndBaloons {
 
 		public Tile GetTile(int x, int y) {
 			return tiles[x][y];
+		}
+
+		public void CreateBaloons(int number) {
+			for (int i = 0; i < number; i++) {
+				Baloon baloonGO = Instantiate(baloonPrefab, baloonSpawnPoint.transform).GetComponent<Baloon>();
+				baloons.Add(baloonGO);
+			}
 		}
 	}
 }

@@ -25,6 +25,7 @@ namespace StonesAndBaloons {
 				}
 			}
 			board.CreateStones(WIDTH, HEIGHT);
+			board.CreateBaloons(2);
 		}
 
 		void Update() {

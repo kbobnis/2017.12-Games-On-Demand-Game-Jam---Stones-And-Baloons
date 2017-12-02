@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Assets\Examples\DroppyBox\Scripts\DroppyBox.cs" />
     <Compile Include="Assets\Examples\Flythrough\Scripts\Flythrough.cs" />
+    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Baloon.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Board.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Game.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\AInput.cs" />
