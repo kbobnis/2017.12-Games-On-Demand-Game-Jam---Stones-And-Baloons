@@ -19,7 +19,7 @@ namespace StonesAndBaloons {
 					GameObject tileGO = Instantiate(tilePrefab, stonesGO.transform);
 					tileGO.transform.localPosition = new Vector3(x, y); //stonesGO is positioned and scaled in that way that so that local position will match the appropriate position 
 					tileGO.name = string.Format("Tile {0}, {1}", x, y);
-					tileGO.GetComponent<Tile>().AddStone(1);
+					tileGO.GetComponent<Tile>().AddStone(0.3f);
 					column.Add(tileGO.GetComponent<Tile>());
 				}
 				tiles.Add(column);

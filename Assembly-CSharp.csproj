@@ -58,7 +58,9 @@
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Board.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Game.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\AInput.cs" />
+    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\BezierCurve.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\GamePos.cs" />
+    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\RopeControllerSimple.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Input\InputListener.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Input\ScreenPlayStoneAndBaloonsAInput.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Tile\Stone.cs" />
