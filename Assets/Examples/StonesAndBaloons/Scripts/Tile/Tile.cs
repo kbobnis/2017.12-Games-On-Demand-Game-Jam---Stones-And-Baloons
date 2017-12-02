@@ -13,7 +13,9 @@ namespace StonesAndBaloons {
 				throw new InvalidOperationException("There is a stone already");
 			}
 			this.stone = Instantiate(this.stonePrefab, transform);
-			this.stone.Init(health);
+			float[] possibilities = {0.3f, 1f, 3f};
+			float chosen = possibilities[UnityEngine.Random.Range(0, possibilities.Length)];
+			this.stone.Init(chosen);
 		}
 
 		public void ApplyForce(float power) {
