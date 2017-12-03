@@ -9,6 +9,7 @@ namespace StonesAndBaloons {
 		[SerializeField] private GameObject whirlwind;
 		[SerializeField] private GameObject explosionGameObject;
 
+		private bool whirlwindEnabled;
 		private bool isApplyingForce;
 		private Stone stone;
 
@@ -30,7 +31,7 @@ namespace StonesAndBaloons {
 
 		void Update() {
 			if (stone == null) {
-				whirlwind.SetActive(isApplyingForce);
+				whirlwind.SetActive(isApplyingForce && whirlwindEnabled);
 			}
 			
 		}
@@ -58,6 +59,10 @@ namespace StonesAndBaloons {
 
 		public bool IsExploding() {
 			return explosionGameObject != null && explosionGameObject.activeSelf;
+		}
+
+		public void EnableWhirlwind(bool b) {
+			whirlwindEnabled = b;
 		}
 	}
 }

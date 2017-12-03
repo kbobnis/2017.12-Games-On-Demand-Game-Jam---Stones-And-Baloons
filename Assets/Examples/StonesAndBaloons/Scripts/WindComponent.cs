@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace StonesAndBaloons {
@@ -10,6 +11,7 @@ namespace StonesAndBaloons {
 		// 3. Add this WindComponent to the empty object, then adjust the Force (Vector2). You can adjust this in the editor or in the script, as it is a public property
 		// Note: Only works on game objects that have the Rigid Body 2D and Collider 2D components
 
+		[SerializeField] private AnimationCurve curve;
 		// Internal list that tracks objects that enter this object's "zone"
 		private List<Collider> objects = new List<Collider>();
 
@@ -26,23 +28,24 @@ namespace StonesAndBaloons {
 		// This function is called every fixed framerate frame
 		void FixedUpdate() {
 			// For every object being tracked
+
+			bool foundNull = false;
 			for (int i = 0; i < objects.Count; i++) {
-				// Get the rigid body for the object.
-				Rigidbody body = objects[i].attachedRigidbody;
+				Rigidbody r = objects[i].attachedRigidbody;
+				if (r == null) {
+					foundNull = true;
+					break;
+				}
 
 				// Apply the force
 				Vector3 distance = transform.position - objects[i].transform.position;
-				distance.z = 0;
-				float force = 1 / (distance.magnitude * distance.magnitude) / 2f;
-				if (force > 2) {
-					force = 2;
-				}
-				Vector3 normalized = (distance).normalized;
-				if (normalized.y < 0) {
-					force *= 3; //to make the easy to drag down
-				}
-				Debug.LogFormat("Distance {0}. Adding force : {1} to {2}", distance, normalized, objects[i].name);
-				body.AddForce(normalized * force);
+				float force = curve.Evaluate(distance.magnitude) * 0.3f;
+				
+				r.AddForce(distance.normalized * force);
+			}
+
+			if (foundNull) {
+				objects = objects.Where(t => t.attachedRigidbody != null).ToList();
 			}
 		}
 
