@@ -24,29 +24,23 @@ namespace StonesAndBaloons {
 					pressedMap[x].Add(false);
 				}
 			}
-			board.CreateStones(WIDTH, HEIGHT);
-			board.CreateBaloons(2);
-		}
-
-		void Update() {
-			for (int x = 0; x < pressedMap.Count; x++) {
-				for (int y = 0; y < pressedMap[x].Count; y++) {
-					bool pressed = pressedMap[x][y];
-					if (pressed) {
-						board.GetTile(x, y).ApplyForce(Time.deltaTime);
-					}
-				}
-			}
+			board.CreateTiles(WIDTH, HEIGHT);
+			board.CreateStones();
+			//board.CreateBaloons();
 		}
 		
 		public void PressedAt(Vector2 coords) {
 			GamePos pos = ScreenPosToGamePos(coords);
 			pressedMap[pos.x][pos.y] = true;
+			Tile tile = board.GetTile(pos.x, pos.y);
+			tile.ApplyForce(true);
 		}
 
 		public void ReleasedAt(Vector2 coords) {
 			GamePos pos = ScreenPosToGamePos(coords);
 			pressedMap[pos.x][pos.y] = false;
+			Tile tile = board.GetTile(pos.x, pos.y);
+			tile.ApplyForce(false);
 		}
 		
 		private GamePos ScreenPosToGamePos(Vector2 coords) {

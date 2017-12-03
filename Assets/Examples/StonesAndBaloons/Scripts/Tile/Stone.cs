@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace StonesAndBaloons {
 	public class Stone : MonoBehaviour {
-		[SerializeField] private ToughnessAndStone[] softStonePrefab;
+		[SerializeField] public ToughnessAndStone[] softStonePrefab;
 		[SerializeField] private GameObject explosion;
 
+		private bool isCrushed;
 		private float startingHealth;
 		private float health;
 
@@ -24,18 +25,25 @@ namespace StonesAndBaloons {
 			stone.transform.localPosition = Vector3.zero;
 		}
 
-		public void Crush(float deltaTime) {
-			if (health > 0) {
-				this.health -= deltaTime;
-				if (health <= 0) {
-					health = 0;
-					
-					Destroy(gameObject);
-				} else {
-					float f = this.health / startingHealth;
+		void Update() {
+
+			if (isCrushed) {
+				if (health > 0) {
+					this.health -= Time.deltaTime;
+					if (health <= 0) {
+						health = 0;
+						Destroy(gameObject);
+					}
 				}
+				transform.rotation = Quaternion.AngleAxis(Mathf.Sin(Time.time / Mathf.Pow(health, 0.5f) ) * 10, new Vector3(0, 0, 1));
+			} else {
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, 1);
 			}
-			transform.Rotate(new Vector3(0, 0, 1),  2 / health);
+
+		}
+
+		public void SetCrush(bool isCrushed) {
+			this.isCrushed = isCrushed;
 		}
 	}
 

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\BezierCurve.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\GamePos.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\RopeControllerSimple.cs" />
+    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\WindComponent.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Input\InputListener.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Input\ScreenPlayStoneAndBaloonsAInput.cs" />
     <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Tile\Stone.cs" />
@@ -75,6 +76,9 @@
     <Compile Include="Assets\Examples\VirtualFloorPad\Scripts\FloorPadSim.cs" />
     <Compile Include="Assets\Examples\VirtualFloorPad\Scripts\HSBColor.cs" />
     <Compile Include="Assets\Examples\VirtualFloorPad\Scripts\TileSim.cs" />
+    <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
+    <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
+    <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\rotation.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="Assets\Scripts\OSC\OSCPacket.cs" />
     <Compile Include="Assets\Scripts\OSC\OSCServer.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
+    <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
     <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
@@ -163,6 +168,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.shader" />
+    <None Include="Assets\Particle Ribbon by Moonflower Carnivore\readme_Simple_Particle_Ribbon.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ColorGrading.cginc" />

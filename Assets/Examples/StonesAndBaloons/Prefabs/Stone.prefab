@@ -68,9 +68,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   softStonePrefab:
-  - health: 0.3
+  - health: 0.1
     prefab: {fileID: 176942, guid: 4b1aea5082805a246b7a8abb21701da7, type: 2}
-  - health: 1
+  - health: 0.5
     prefab: {fileID: 116924, guid: 25728dbea52852f43a01e13ac0132bb5, type: 2}
-  - health: 3
+  - health: 1
     prefab: {fileID: 175284, guid: 4493f5a7c6d067e4b9d233502d0109f3, type: 2}
+  explosion: {fileID: 0}
