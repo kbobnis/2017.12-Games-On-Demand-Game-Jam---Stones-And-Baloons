@@ -7,6 +7,7 @@ namespace StonesAndBaloons {
 		[SerializeField] private Stone stonePrefab;
 		[SerializeField] private Light light;
 		[SerializeField] private GameObject whirlwind;
+		[SerializeField] private GameObject explosionGameObject;
 
 		private bool isApplyingForce;
 		private Stone stone;
@@ -14,6 +15,7 @@ namespace StonesAndBaloons {
 		void Awake() {
 			light.enabled = false;
 			whirlwind.SetActive(false);
+			explosionGameObject.SetActive(false);
 		}
 
 		public void AddStone(float health) {
@@ -27,15 +29,35 @@ namespace StonesAndBaloons {
 		}
 
 		void Update() {
-			light.enabled = isApplyingForce && stone != null;
-			whirlwind.SetActive(isApplyingForce);
-			if (stone != null) {
-				stone.SetCrush(isApplyingForce);
+			if (stone == null) {
+				whirlwind.SetActive(isApplyingForce);
 			}
+			
 		}
 
 		public void ApplyForce(bool enable) {
 			isApplyingForce = enable;
+			if (stone != null) {
+				stone.SetCrush(isApplyingForce);
+			}
+			light.enabled = enable;
+		}
+
+		public bool HasStone() {
+			return stone != null;
+		}
+
+		public void Explode() {
+			if (stone != null) {
+				Destroy(stone.gameObject);
+				stone = null;
+			}
+			explosionGameObject.SetActive(true);
+			Destroy(explosionGameObject, 2f);
+		}
+
+		public bool IsExploding() {
+			return explosionGameObject != null && explosionGameObject.activeSelf;
 		}
 	}
 }

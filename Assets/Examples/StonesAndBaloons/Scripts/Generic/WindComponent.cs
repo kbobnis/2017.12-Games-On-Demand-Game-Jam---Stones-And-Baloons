@@ -31,22 +31,29 @@ namespace StonesAndBaloons {
 				Rigidbody body = objects[i].attachedRigidbody;
 
 				// Apply the force
-				Vector3 distance = objects[i].transform.position - transform.position;
-				Vector3 dir = (distance).normalized / 5f;
-				dir.z = 0;
-				Debug.LogFormat("Distance {0}. Adding force : {1} to {2}", distance, dir, objects[i].name);
-				body.AddForce(dir);
+				Vector3 distance = transform.position - objects[i].transform.position;
+				distance.z = 0;
+				float force = 1 / (distance.magnitude * distance.magnitude) / 2f;
+				if (force > 2) {
+					force = 2;
+				}
+				Vector3 normalized = (distance).normalized;
+				if (normalized.y < 0) {
+					force *= 3; //to make the easy to drag down
+				}
+				Debug.LogFormat("Distance {0}. Adding force : {1} to {2}", distance, normalized, objects[i].name);
+				body.AddForce(normalized * force);
 			}
 		}
 
 		void OnTriggerEnter(Collider other) {
-			if (other.attachedRigidbody != null && other.GetComponent<Baloon>() != null) {
+			if (other.attachedRigidbody != null && other.transform.parent.GetComponent<Baloon>() != null) {
 				objects.Add(other);
 			}
 		}
 
 		void OnTriggerExit(Collider other) {
-			if (other.attachedRigidbody != null && other.GetComponent<Baloon>() != null) {
+			if (other.attachedRigidbody != null && other.transform.parent.GetComponent<Baloon>() != null) {
 				objects.Remove(other);
 			}
 		}
