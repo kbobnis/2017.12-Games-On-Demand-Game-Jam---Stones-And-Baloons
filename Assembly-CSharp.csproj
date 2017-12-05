@@ -52,6 +52,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ChimneyGame\Scripts\Baloon.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Board.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\BoardListener.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Ceiling.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Game.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Generic\AInput.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Generic\DeathListener.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Generic\GamePos.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Generic\PlaySingleSound.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Input\InputListener.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Input\ScreenPlayStoneAndBaloonsAInput.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Tile\Stone.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\Tile\Tile.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\WindComponent.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
@@ -61,19 +76,6 @@
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\Examples\DroppyBox\Scripts\DroppyBox.cs" />
     <Compile Include="Assets\Examples\Flythrough\Scripts\Flythrough.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Baloon.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Board.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\BoardListener.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Ceiling.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Game.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\AInput.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\DeathListener.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Generic\GamePos.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Input\InputListener.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Input\ScreenPlayStoneAndBaloonsAInput.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Tile\Stone.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\Tile\Tile.cs" />
-    <Compile Include="Assets\Examples\StonesAndBaloons\Scripts\WindComponent.cs" />
     <Compile Include="Assets\Examples\VirtualFloorPad\Scripts\FloorPadSim.cs" />
     <Compile Include="Assets\Examples\VirtualFloorPad\Scripts\HSBColor.cs" />
     <Compile Include="Assets\Examples\VirtualFloorPad\Scripts\TileSim.cs" />
@@ -166,6 +168,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeAdaptation.cginc" />
+    <None Include="Assets\StoneWalls\readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\GrainGen.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\FXAA.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
