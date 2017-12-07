@@ -5,6 +5,7 @@ namespace StonesAndBaloons {
 	public class Stone : MonoBehaviour {
 		[SerializeField] public ToughnessAndStone[] softStonePrefab;
 		[SerializeField] private GameObject explosion;
+		[SerializeField] private AnimationCurve rotationCurve;
 
 		private AudioSource crushing;
 		private bool isCrushed;
@@ -27,7 +28,6 @@ namespace StonesAndBaloons {
 		}
 
 		void Update() {
-
 			if (isCrushed) {
 				if (health > 0) {
 					this.health -= Time.deltaTime;
@@ -36,16 +36,19 @@ namespace StonesAndBaloons {
 						if (this.crushing != null) {
 							this.crushing.Stop();
 						}
-						PlaySingleSound.SpawnSound(SoundManager.Me.Bang);
 						Destroy(gameObject);
 					}
 				}
-				float angle =  Mathf.Sin(Time.time / Mathf.Pow(health, 0.5f)) * 10 ;
+				float healthPercentage = health / startingHealth;
+				float angle =  Mathf.Sin(Time.time + rotationCurve.Evaluate(healthPercentage) * 10f) * 15f;
 				transform.rotation = Quaternion.AngleAxis(angle, new Vector3(0, 0, 1));
 			} else {
 				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, 1);
 			}
+		}
 
+		private void OnDestroy() {
+			PlaySingleSound.SpawnSound(SoundManager.Me.Bang, new SoundOptions(){ MaxSimultaneous =  20});
 		}
 
 		public void SetCrush(bool isCrushed) {

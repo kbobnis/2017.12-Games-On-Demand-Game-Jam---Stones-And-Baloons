@@ -19,12 +19,15 @@ namespace StonesAndBaloons {
 			int h = 10;
 			foreach (List<Tile> col in tiles) {
 				foreach (Tile tile in col) {
-					Destroy(tile);
+					Debug.LogFormat("Destroying tile: {0}", tile.gameObject.name);
+					Destroy(tile.gameObject);
 				}
 			}
 			tiles.Clear();
 			foreach (Baloon baloon in baloons) {
-				Destroy(baloon);
+				if (baloon != null && baloon.gameObject != null) {
+					Destroy(baloon.gameObject);
+				}
 			}
 			baloons.Clear();
 
@@ -34,9 +37,7 @@ namespace StonesAndBaloons {
 					GameObject tileGO = Instantiate(tilePrefab, stonesGO.transform);
 					tileGO.transform.localPosition = new Vector3(x, y); //stonesGO is positioned and scaled in that way that so that local position will match the appropriate position 
 					tileGO.name = string.Format("Tile {0}, {1}", x, y);
-					Tile tile = tileGO.GetComponent<Tile>();
-					tile.EnableWhirlwind(y != 0); //on the top row we don't want to have any wirlwind
-					column.Add(tile);
+					column.Add(tileGO.GetComponent<Tile>());
 				}
 				tiles.Add(column);
 			}
@@ -44,10 +45,9 @@ namespace StonesAndBaloons {
 
 		private void CreateStones() {
 			foreach (List<Tile> col in tiles) {
-				for (int i = 0; i < col.Count - 1; i++) {
-					//in the last tile we want to have baloons
+				for (int i = 0; i < col.Count - 1; i++) { //in the last tile we want to have baloons
 					Tile tile = col[i];
-					tile.AddStone(0.3f);
+					tile.AddStone();
 				}
 			}
 		}
@@ -63,6 +63,7 @@ namespace StonesAndBaloons {
 				Baloon baloonGO = Instantiate(baloonPrefab).GetComponent<Baloon>();
 				count++;
 				baloonGO.transform.position = lastTile.transform.position;
+				baloonGO.gameObject.name = string.Format("Baloon {0}", count);
 				baloonGO.GetComponentInChildren<Baloon>().Init(this);
 				baloons.Add(baloonGO);
 			}
@@ -157,7 +158,7 @@ namespace StonesAndBaloons {
 					return;
 				}
 			}
-
+			PlaySingleSound.SpawnSound(SoundManager.Me.LevelSuccess);
 			ExplodeAllTiles();
 		}
 	}

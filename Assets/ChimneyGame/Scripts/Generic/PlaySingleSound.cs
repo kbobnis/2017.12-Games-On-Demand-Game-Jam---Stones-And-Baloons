@@ -9,14 +9,20 @@ public class PlaySingleSound : MonoBehaviour {
 	private float SoundStart = 0f;
 	public OneSound MySound;
 
-	public static AudioSource SpawnSound( AudioClip clip, float volume=1){
+	public static AudioSource SpawnSound( AudioClip clip, SoundOptions options = null) {
+		options = options ?? new SoundOptions();
 		if (clip != null){
 			if (!Sounds.ContainsKey(clip)) {
-				Sounds.Add(clip, new OneSound(clip, volume));
+				Sounds.Add(clip, new OneSound(clip, options));
 			}
 			return Sounds[clip].PlayAnother();
 		}
 		return null;
+	}
+	
+	public static AudioSource SpawnSound(AudioClip[] clips, SoundOptions options = null) {
+		AudioClip clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+		return SpawnSound(clip, options);
 	}
 
 	void Update() {
@@ -30,27 +36,31 @@ public class PlaySingleSound : MonoBehaviour {
 	}
 }
 
+public class SoundOptions {
+	public readonly float Volume = 1;
+	public int MaxSimultaneous = 3;
+	public float MinDelay = 0.1f;
+}
+
 public class OneSound {
 
 	private AudioClip AudioClip;
-	private float Volume;
 	public int ActuallyPlaying;
-	private int MaxSimult = 5;
-	private float MinDelay = 0.1f;
 	private float LastPlay;
+	private SoundOptions Options;
 
-	public OneSound(AudioClip ac, float volume) {
+	public OneSound(AudioClip ac, SoundOptions options) {
 		AudioClip = ac;
-		Volume = volume;
+		Options = options;
 	}
 
 	public AudioSource PlayAnother() {
-		if (ActuallyPlaying < MaxSimult && Time.time - MinDelay > LastPlay) {
+		if (ActuallyPlaying < Options.MaxSimultaneous && Time.time - Options.MinDelay > LastPlay) {
 			LastPlay = Time.time;
 			ActuallyPlaying++;
 			GameObject go = new GameObject("sound clip: " + AudioClip.name);
 			AudioSource audio = go.AddComponent<AudioSource>();
-			audio.volume = Volume;// -(Volume / MaxSimult * ActuallyPlaying);
+			audio.volume = Options.Volume;// -(Volume / MaxSimult * ActuallyPlaying);
 			audio.panStereo = 0;// pan == 0 ? Random.Range(-1, 1) : pan;
 			audio.clip = AudioClip;
 			audio.spatialBlend = -1f;

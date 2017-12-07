@@ -6,20 +6,23 @@ namespace StonesAndBaloons {
 	public class Tile : MonoBehaviour {
 		[SerializeField] private Stone stonePrefab;
 		[SerializeField] private Light light;
-		[SerializeField] private GameObject whirlwind;
 		[SerializeField] private GameObject explosionGameObject;
 
-		private bool whirlwindEnabled;
-		private bool isApplyingForce;
+		public bool isApplyingForce { get; private set; }
 		private Stone stone;
 
 		void Awake() {
 			light.enabled = false;
-			whirlwind.SetActive(false);
 			explosionGameObject.SetActive(false);
+			foreach (Transform child in transform) {
+				//there was a bug that shoot component was not working after new game. 
+				//but making this disabled and enabled in editor did the job
+				child.gameObject.SetActive(!child.gameObject.activeSelf);
+				child.gameObject.SetActive(!child.gameObject.activeSelf);
+			}
 		}
 
-		public void AddStone(float health) {
+		public void AddStone() {
 			if (stone != null) {
 				throw new InvalidOperationException("There is a stone already");
 			}
@@ -30,17 +33,12 @@ namespace StonesAndBaloons {
 			this.stone.Init(chosen);
 		}
 
-		void Update() {
-			if (stone == null) {
-				whirlwind.SetActive(isApplyingForce && whirlwindEnabled);
-			}
-			
-		}
-
 		public void ApplyForce(bool enable) {
 			isApplyingForce = enable;
 			if (stone != null) {
 				stone.SetCrush(isApplyingForce);
+			} else if (GetComponentInChildren<ShootComponent>() != null) {
+				GetComponentInChildren<ShootComponent>().isApplyingForce = enable;
 			}
 			light.enabled = enable;
 		}
@@ -60,10 +58,6 @@ namespace StonesAndBaloons {
 
 		public bool IsExploding() {
 			return explosionGameObject != null && explosionGameObject.activeSelf;
-		}
-
-		public void EnableWhirlwind(bool b) {
-			whirlwindEnabled = b;
 		}
 	}
 }

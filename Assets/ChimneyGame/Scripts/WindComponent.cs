@@ -28,7 +28,7 @@ namespace StonesAndBaloons {
 		// This function is called every fixed framerate frame
 		void FixedUpdate() {
 			// For every object being tracked
-
+			return;
 			bool foundNull = false;
 			for (int i = 0; i < objects.Count; i++) {
 				Rigidbody r = objects[i].attachedRigidbody;
@@ -40,10 +40,12 @@ namespace StonesAndBaloons {
 				// Apply the force
 				Vector3 distance = transform.position - objects[i].transform.position;
 				distance.y = 0;
-				float force = curve.Evaluate(distance.magnitude) * 1f;
+				float force = curve.Evaluate(distance.magnitude) * 2f;
+				if (force > 0.5f) {
+					PlaySingleSound.SpawnSound(SoundManager.Me.Wind, new SoundOptions { MaxSimultaneous = 1});
+				}
 				
 				r.AddForce(distance.normalized * force);
-				Debug.LogFormat("Distance {0}. magnitude {1}. force {2}", distance, distance.magnitude, force);
 			}
 
 			if (foundNull) {

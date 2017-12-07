@@ -63,6 +63,7 @@
     <Compile Include="Assets\ChimneyGame\Scripts\Generic\PlaySingleSound.cs" />
     <Compile Include="Assets\ChimneyGame\Scripts\Input\InputListener.cs" />
     <Compile Include="Assets\ChimneyGame\Scripts\Input\ScreenPlayStoneAndBaloonsAInput.cs" />
+    <Compile Include="Assets\ChimneyGame\Scripts\ShootComponent.cs" />
     <Compile Include="Assets\ChimneyGame\Scripts\SoundManager.cs" />
     <Compile Include="Assets\ChimneyGame\Scripts\Tile\Stone.cs" />
     <Compile Include="Assets\ChimneyGame\Scripts\Tile\Tile.cs" />

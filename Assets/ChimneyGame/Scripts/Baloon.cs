@@ -15,21 +15,21 @@ namespace StonesAndBaloons {
 
 		void Awake() {
 			sparklesEffect.gameObject.SetActive(false);
-			randomOffset = Random.Range(-1, 1);
+			randomOffset = Random.Range(-1f, 1f);
 		}
 
 		private void FixedUpdate() {
-			Vector3 actualForce = GetComponentInChildren<ConstantForce>().force;
-			actualForce.x = Mathf.Sign(Mathf.Sin(randomOffset + Time.time * 1.5f)) / 10f;
-			GetComponentInChildren<ConstantForce>().force = actualForce;
+			float x = Mathf.Sign(Mathf.Sin(randomOffset + Time.time * 0.3f)) * 0.7f;
+			GetComponentInChildren<Rigidbody>().AddForce(x, 0, 0);
 		}
 
 		public void TurnToSparkles() {
 			GetComponentInChildren<MeshRenderer>().enabled = false;
-			GetComponent<Rigidbody>().isKinematic = true;
+			GetComponentInChildren<Rigidbody>().isKinematic = true;
 			GetComponentInChildren<Collider>().enabled = false;
 			sparklesEffect.gameObject.SetActive(true);
 			this.died = true;
+			PlaySingleSound.SpawnSound(SoundManager.Me.BaloonsFinished);
 			foreach (DeathListener deathListener in listeners) {
 				deathListener.Died(this);
 			}
@@ -44,6 +44,10 @@ namespace StonesAndBaloons {
 				throw new ArgumentException(string.Format("Listener {0} already added.", listener));
 			}
 			this.listeners.Add(listener);
+		}
+		
+		void OnTriggerEnter(Collider other) {
+			Debug.LogFormat("baloon touched {0}", other.gameObject.name);
 		}
 
 		public bool Died() {
