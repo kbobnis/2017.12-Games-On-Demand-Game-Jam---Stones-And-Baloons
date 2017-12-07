@@ -1,25 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace StonesAndBaloons {
 	public class Tile : MonoBehaviour {
 		[SerializeField] private Stone stonePrefab;
-		[SerializeField] private Light light;
 		[SerializeField] private GameObject explosionGameObject;
+		[SerializeField] private ShootComponent shootComponent;
+
+		public GamePos myPos { get; private set; }
+		private Board board;
 
 		public bool isApplyingForce { get; private set; }
 		private Stone stone;
 
 		void Awake() {
-			light.enabled = false;
 			explosionGameObject.SetActive(false);
-			foreach (Transform child in transform) {
-				//there was a bug that shoot component was not working after new game. 
-				//but making this disabled and enabled in editor did the job
-				child.gameObject.SetActive(!child.gameObject.activeSelf);
-				child.gameObject.SetActive(!child.gameObject.activeSelf);
-			}
 		}
 
 		public void AddStone() {
@@ -27,10 +25,10 @@ namespace StonesAndBaloons {
 				throw new InvalidOperationException("There is a stone already");
 			}
 			this.stone = Instantiate(this.stonePrefab, transform);
-			this.stone.transform.Rotate(UnityEngine.Random.Range(0, 180), 0, 0);
-			float[] possibilities = stonePrefab.softStonePrefab.Select(t => t.health).ToArray();
+			float[] possibilities = stonePrefab.toughnessAndStone.Select(t => t.health).ToArray();
 			float chosen = possibilities[UnityEngine.Random.Range(0, possibilities.Length)];
 			this.stone.Init(chosen);
+			
 		}
 
 		public void ApplyForce(bool enable) {
@@ -40,7 +38,6 @@ namespace StonesAndBaloons {
 			} else if (GetComponentInChildren<ShootComponent>() != null) {
 				GetComponentInChildren<ShootComponent>().isApplyingForce = enable;
 			}
-			light.enabled = enable;
 		}
 
 		public bool HasStone() {
@@ -58,6 +55,33 @@ namespace StonesAndBaloons {
 
 		public bool IsExploding() {
 			return explosionGameObject != null && explosionGameObject.activeSelf;
+		}
+
+		public void Init(GamePos gamePos, Board board) {
+			myPos = gamePos;
+			this.board = board;
+			
+			Destroy(shootComponent.GetComponent<Collider>());
+			SphereCollider c = shootComponent.gameObject.AddComponent<SphereCollider>();
+			c.isTrigger = true;
+			c.radius = 0.5f;
+		}
+
+		public List<GamePos> GetFreeSides() {
+			List<GamePos> allSides = new List<GamePos>{new GamePos(-1, 0), new GamePos(0, -1), new GamePos(1, 0), new GamePos(0, 1)};
+
+			List<GamePos> freeSides = new List<GamePos>();
+			foreach (GamePos side in allSides) {
+				Tile tile = board.GetTileAtPos(myPos.x + side.x, myPos.y + side.y);
+				if (tile != null && tile.HasNothing()) {
+					freeSides.Add(side);
+				}
+			}
+			return freeSides;
+		}
+
+		private bool HasNothing() {
+			return stone == null;
 		}
 	}
 }

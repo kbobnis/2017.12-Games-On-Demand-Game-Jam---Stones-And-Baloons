@@ -15,7 +15,7 @@ namespace StonesAndBaloons {
 		}
 
 		public override string ToString() {
-			return string.Format("x {0}, y {0}", this.x, this.y);
+			return string.Format("x {0}, y {1}", this.x, this.y);
 		}
 	}
 }

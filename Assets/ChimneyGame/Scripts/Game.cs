@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace StonesAndBaloons {
 	public class Game : MonoBehaviour, InputListener, BoardListener {
@@ -37,7 +38,7 @@ namespace StonesAndBaloons {
 		}
 
 		public void NothingLeftOnBoard() {
-			StartLevel();
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
 }

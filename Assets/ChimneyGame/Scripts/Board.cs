@@ -10,8 +10,8 @@ namespace StonesAndBaloons {
 		[SerializeField] private GameObject tilePrefab;
 		[SerializeField] private Baloon baloonPrefab;
 
-		private List<List<Tile>> tiles = new List<List<Tile>>();
-		private List<Baloon> baloons = new List<Baloon>();
+		private readonly List<List<Tile>> tiles = new List<List<Tile>>();
+		private readonly List<Baloon> baloons = new List<Baloon>();
 		private readonly List<BoardListener> listeners = new List<BoardListener>();
 
 		private void CreateTiles() {
@@ -19,7 +19,6 @@ namespace StonesAndBaloons {
 			int h = 10;
 			foreach (List<Tile> col in tiles) {
 				foreach (Tile tile in col) {
-					Debug.LogFormat("Destroying tile: {0}", tile.gameObject.name);
 					Destroy(tile.gameObject);
 				}
 			}
@@ -37,6 +36,7 @@ namespace StonesAndBaloons {
 					GameObject tileGO = Instantiate(tilePrefab, stonesGO.transform);
 					tileGO.transform.localPosition = new Vector3(x, y); //stonesGO is positioned and scaled in that way that so that local position will match the appropriate position 
 					tileGO.name = string.Format("Tile {0}, {1}", x, y);
+					tileGO.GetComponent<Tile>().Init(new GamePos(x, y), this);
 					column.Add(tileGO.GetComponent<Tile>());
 				}
 				tiles.Add(column);
@@ -61,9 +61,8 @@ namespace StonesAndBaloons {
 			foreach (List<Tile> tileColumn in tiles) {
 				Tile lastTile = tileColumn.Last();
 				Baloon baloonGO = Instantiate(baloonPrefab).GetComponent<Baloon>();
-				count++;
 				baloonGO.transform.position = lastTile.transform.position;
-				baloonGO.gameObject.name = string.Format("Baloon {0}", count);
+				baloonGO.gameObject.name = string.Format("Baloon {0}", ++count);
 				baloonGO.GetComponentInChildren<Baloon>().Init(this);
 				baloons.Add(baloonGO);
 			}
@@ -160,6 +159,16 @@ namespace StonesAndBaloons {
 			}
 			PlaySingleSound.SpawnSound(SoundManager.Me.LevelSuccess);
 			ExplodeAllTiles();
+		}
+
+		public Tile GetTileAtPos(int x, int y) {
+			if (x < 0 || x >= tiles.Count) {
+				return null;
+			}
+			if (y < 0 || y >= tiles[x].Count) {
+				return null;
+			}
+			return tiles[x][y];
 		}
 	}
 }

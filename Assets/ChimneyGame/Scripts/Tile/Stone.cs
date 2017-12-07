@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StonesAndBaloons {
 	public class Stone : MonoBehaviour {
-		[SerializeField] public ToughnessAndStone[] softStonePrefab;
+		[SerializeField] public ToughnessAndStone[] toughnessAndStone;
 		[SerializeField] private GameObject explosion;
 		[SerializeField] private AnimationCurve rotationCurve;
 
@@ -14,7 +14,7 @@ namespace StonesAndBaloons {
 
 		public void Init(float health) {
 			ToughnessAndStone lastMatching = null;
-			foreach (ToughnessAndStone healthAndStone in softStonePrefab) {
+			foreach (ToughnessAndStone healthAndStone in toughnessAndStone) {
 				if (healthAndStone.health == health) {
 					lastMatching = healthAndStone;
 				}
