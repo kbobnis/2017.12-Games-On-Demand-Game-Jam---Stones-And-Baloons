@@ -56,8 +56,13 @@ namespace StonesAndBaloons {
 
 		public void Init(DeathListener listener) {
 			RegisterDeathListener(listener);
-			
-			GetComponentInChildren<MeshRenderer>().materials = new Material[] { colorMaterials[UnityEngine.Random.Range(0, colorMaterials.Length)]};
+
+			Material m = colorMaterials[UnityEngine.Random.Range(0, colorMaterials.Length)];
+			float r = UnityEngine.Random.Range(0, 1f);
+			float g = UnityEngine.Random.Range(0, 1f);
+			float b = UnityEngine.Random.Range(0, 1f);
+			m.color = new Color(r, g, b);// UnityEngine.Random.ColorHSV(0.4f, 1f);
+			GetComponentInChildren<MeshRenderer>().materials = new Material[] { m };
 		}
 	}
 }

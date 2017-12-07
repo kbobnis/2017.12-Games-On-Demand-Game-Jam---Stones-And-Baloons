@@ -40,6 +40,7 @@ public class SoundOptions {
 	public readonly float Volume = 1;
 	public int MaxSimultaneous = 3;
 	public float MinDelay = 0.1f;
+	public bool Repeat;
 }
 
 public class OneSound {
@@ -64,6 +65,7 @@ public class OneSound {
 			audio.panStereo = 0;// pan == 0 ? Random.Range(-1, 1) : pan;
 			audio.clip = AudioClip;
 			audio.spatialBlend = -1f;
+			audio.loop = Options.Repeat;
 			audio.Play();
 			PlaySingleSound playSound = go.AddComponent<PlaySingleSound>();
 			playSound.MySound = this;

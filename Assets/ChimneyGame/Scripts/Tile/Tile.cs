@@ -18,6 +18,7 @@ namespace StonesAndBaloons {
 
 		void Awake() {
 			explosionGameObject.SetActive(false);
+			GetComponentInChildren<Light>().enabled = false;
 		}
 
 		public void AddStone() {
@@ -38,6 +39,12 @@ namespace StonesAndBaloons {
 			} else if (GetComponentInChildren<ShootComponent>() != null) {
 				GetComponentInChildren<ShootComponent>().isApplyingForce = enable;
 			}
+			
+			bool lastPos = GetComponentInChildren<Light>().enabled;
+			if (enable && lastPos != enable) {
+				GetComponentInChildren<Light>().color = UnityEngine.Random.ColorHSV(0.4f, 0.7f);
+			}
+			GetComponentInChildren<Light>().enabled = enable;
 		}
 
 		public bool HasStone() {
@@ -60,7 +67,6 @@ namespace StonesAndBaloons {
 		public void Init(GamePos gamePos, Board board) {
 			myPos = gamePos;
 			this.board = board;
-			
 			Destroy(shootComponent.GetComponent<Collider>());
 			SphereCollider c = shootComponent.gameObject.AddComponent<SphereCollider>();
 			c.isTrigger = true;

@@ -54,7 +54,7 @@ namespace StonesAndBaloons {
 		public void SetCrush(bool isCrushed) {
 			this.isCrushed = isCrushed;
 			if (health > 0 && isCrushed) {
-				this.crushing = PlaySingleSound.SpawnSound(SoundManager.Me.StoneCrushing);
+				this.crushing = PlaySingleSound.SpawnSound(SoundManager.Me.StoneCrushing, new SoundOptions() { Repeat = true});
 			} else {
 				if (this.crushing != null) {
 					this.crushing.Stop();

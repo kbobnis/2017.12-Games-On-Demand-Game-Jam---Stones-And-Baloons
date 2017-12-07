@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: dark
+  m_Name: light - Copy
   m_Shader: {fileID: 4800000, guid: b70f0a8c008c7a643baaf8f936545697, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -26,4 +26,4 @@ Material:
     - _Amount: 0
     - _Cutoff: 0.22
     m_Colors:
-    - _Color: {r: 0.111413, g: 0.13326098, b: 0.092592664, a: 1}
+    - _Color: {r: 0.9412257, g: 0.9852941, b: 0.5288711, a: 1}
