@@ -594,18 +594,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sparklesEffect: {fileID: 1948059835666136}
   colorMaterials:
-  - {fileID: 2100000, guid: 9b8c2f370ee31ca4baf1679edf853956, type: 2}
-  - {fileID: 2100000, guid: 8251e041fb3707146bb4526dc07727f1, type: 2}
-  - {fileID: 2100000, guid: 2eb1de820c5ab954ba21a367c8b0de2c, type: 2}
-  - {fileID: 2100000, guid: babfb326b69a6b949a73d089b35f8d26, type: 2}
   - {fileID: 2100000, guid: 8714864f9871e5042a289217e9620d98, type: 2}
   - {fileID: 2100000, guid: 3adc6411ca583d44cacfb9e402c08758, type: 2}
   - {fileID: 2100000, guid: 1a52a852c7da15042a45b2c157b38efa, type: 2}
   - {fileID: 2100000, guid: 68f998105d0462044b709c7ff12a7d52, type: 2}
-  - {fileID: 2100000, guid: 25203bb5e51d11e4780fcaf00c286ead, type: 2}
-  - {fileID: 2100000, guid: b1ee6bdca0da12143a72fe87162bfe9e, type: 2}
-  - {fileID: 2100000, guid: 905b396e550d1c94eba5baafa9823ff3, type: 2}
-  - {fileID: 2100000, guid: b58022c10401fe048b2d3dfd6c6a4c39, type: 2}
 --- !u!135 &135002752827801866
 SphereCollider:
   m_ObjectHideFlags: 1

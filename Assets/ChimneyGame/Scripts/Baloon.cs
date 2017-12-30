@@ -59,7 +59,7 @@ namespace StonesAndBaloons {
 			float r = Random.Range(0, 1f);
 			float g = Random.Range(0, 1f);
 			float b = Random.Range(0, 1f);
-			m.color = new Color(r, g, b);
+			//m.color = new Color(r, g, b);
 			GetComponentInChildren<MeshRenderer>().materials = new Material[] { m };
 		}
 
