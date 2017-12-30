@@ -57,6 +57,7 @@ namespace StonesAndBaloons {
 				stone = null;
 			}
 			explosionGameObject.SetActive(true);
+			explosionGameObject.GetComponent<Baloon>().SetRandomColor();
 			Destroy(explosionGameObject, 2f);
 		}
 

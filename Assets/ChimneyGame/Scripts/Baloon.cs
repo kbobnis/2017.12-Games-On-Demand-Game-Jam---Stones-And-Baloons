@@ -54,15 +54,18 @@ namespace StonesAndBaloons {
 			return died;
 		}
 
+		public void SetRandomColor() {
+			Material m = colorMaterials[Random.Range(0, colorMaterials.Length)];
+			float r = Random.Range(0, 1f);
+			float g = Random.Range(0, 1f);
+			float b = Random.Range(0, 1f);
+			m.color = new Color(r, g, b);
+			GetComponentInChildren<MeshRenderer>().materials = new Material[] { m };
+		}
+
 		public void Init(DeathListener listener) {
 			RegisterDeathListener(listener);
-
-			Material m = colorMaterials[UnityEngine.Random.Range(0, colorMaterials.Length)];
-			float r = UnityEngine.Random.Range(0, 1f);
-			float g = UnityEngine.Random.Range(0, 1f);
-			float b = UnityEngine.Random.Range(0, 1f);
-			m.color = new Color(r, g, b);// UnityEngine.Random.ColorHSV(0.4f, 1f);
-			GetComponentInChildren<MeshRenderer>().materials = new Material[] { m };
+			SetRandomColor();
 		}
 	}
 }

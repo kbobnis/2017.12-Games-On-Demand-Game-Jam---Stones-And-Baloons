@@ -890,7 +890,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &914098371
+--- !u!1001 &923559358
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -928,6 +928,10 @@ Prefab:
     - target: {fileID: 4706124047014876, guid: c765c39b467ad4347a9baa5a31483d33, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054427714189464, guid: c765c39b467ad4347a9baa5a31483d33, type: 2}
+      propertyPath: m_Name
+      value: Tile (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1054427714189464, guid: c765c39b467ad4347a9baa5a31483d33, type: 2}
       propertyPath: m_IsActive
